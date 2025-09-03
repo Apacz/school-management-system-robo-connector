@@ -1,0 +1,15 @@
+{
+  "code": "doc.weekly_digest",
+  "title": "Weekly Class Digest",
+  "type": "message",
+  "audience": "parent_or_student",
+  "placeholders": [
+    "class_group.name",
+    "week.range",
+    "topics[]",
+    "attendance.stats",
+    "homework.summary",
+    "upcoming.info"
+  ],
+  "body_markdown": "**Class:** {{ class_group.name }}\n**Week:** {{ week.range }}\n\n**Topics covered:**\n{% for t in topics %}- {{ t }}{% endfor %}\n\n**Attendance:** {{ attendance.stats }}\n\n**Homework summary**\n{{ homework.summary }}\n\n**Coming up next week**\n{{ upcoming.info }}\n"
+}

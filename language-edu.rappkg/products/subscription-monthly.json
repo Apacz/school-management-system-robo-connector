@@ -1,0 +1,18 @@
+{
+  "code": "prod.subscription.monthly",
+  "title": "Monthly Subscription (4×60min)",
+  "type": "subscription",
+  "billing_cycle": "monthly",
+  "included_lessons": 4,
+  "price": {
+    "currency": "PLN",
+    "amount": 480
+  },
+  "vat_profile": "PL_EDU_0",
+  "overage": {
+    "per_lesson": {
+      "currency": "PLN",
+      "amount": 130
+    }
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "code": "edu.onboarding.seed_defaults",
+  "title": "Education App Onboarding",
+  "context_scope": [
+    "organisation"
+  ],
+  "triggers": [
+    "on_app_install"
+  ],
+  "steps": [
+    {
+      "id": "detect_preset",
+      "title": "Detect or choose preset",
+      "group": "Setup",
+      "actor_role": "owner",
+      "optional": false,
+      "execution": "manual",
+      "inputs": [
+        {
+          "name": "preset",
+          "type": "enum",
+          "options": [
+            "preset.tutor",
+            "preset.school"
+          ],
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "preset_applied",
+          "type": "boolean"
+        }
+      ],
+      "actions": [
+        {
+          "type": "apply_preset",
+          "args": {
+            "preset_var": "preset"
+          }
+        }
+      ],
+      "decorators": []
+    },
+    {
+      "id": "load_defaults",
+      "title": "Load default policies & products",
+      "group": "Setup",
+      "actor_role": "system",
+      "optional": false,
+      "execution": "auto",
+      "inputs": [],
+      "outputs": [],
+      "actions": [
+        {
+          "type": "ensure_policies_products",
+          "args": {}
+        }
+      ],
+      "decorators": []
+    },
+    {
+      "id": "publish_booking",
+      "title": "Publish booking page (if enabled)",
+      "group": "Setup",
+      "actor_role": "system",
+      "optional": true,
+      "execution": "auto",
+      "inputs": [],
+      "outputs": [],
+      "actions": [
+        {
+          "type": "create_public_route",
+          "args": {
+            "route_code": "edu.booking.public"
+          }
+        }
+      ],
+      "decorators": []
+    }
+  ]
+}

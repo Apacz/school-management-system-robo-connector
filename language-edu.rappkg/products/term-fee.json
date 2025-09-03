@@ -1,0 +1,18 @@
+{
+  "code": "prod.term.fee",
+  "title": "Term Fee (Group)",
+  "type": "term_fee",
+  "term_weeks": 14,
+  "sessions_per_week": 2,
+  "price": {
+    "currency": "PLN",
+    "amount": 1600
+  },
+  "vat_profile": "PL_EDU_0",
+  "discounts": [
+    {
+      "type": "sibling",
+      "amount_pct": 10
+    }
+  ]
+}

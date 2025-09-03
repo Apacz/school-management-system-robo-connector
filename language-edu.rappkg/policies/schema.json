@@ -1,0 +1,57 @@
+{
+  "title": "Policy Schema (Education)",
+  "version": "1.0",
+  "properties": {
+    "cancel_window_hours": {
+      "type": "integer",
+      "min": 0
+    },
+    "late_cancel_charge": {
+      "type": "string",
+      "enum": [
+        "no_charge",
+        "full",
+        "partial",
+        "credit_only"
+      ]
+    },
+    "no_show_charge": {
+      "type": "string",
+      "enum": [
+        "no_charge",
+        "full",
+        "partial"
+      ]
+    },
+    "make_up_enabled": {
+      "type": "boolean"
+    },
+    "make_up_limit_per_month": {
+      "type": "integer"
+    },
+    "bundle_expiry_days": {
+      "type": "integer"
+    },
+    "attendance_required_for_revenue": {
+      "type": "boolean"
+    },
+    "digest_day_of_week": {
+      "type": "string",
+      "enum": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat",
+        "Sun"
+      ]
+    }
+  },
+  "required": [
+    "cancel_window_hours",
+    "late_cancel_charge",
+    "no_show_charge",
+    "attendance_required_for_revenue"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "code": "preset.school",
+  "title": "Language School",
+  "flags": {
+    "scheduling_mode": "static-timetable",
+    "delivery_modes": [
+      "onsite",
+      "online"
+    ],
+    "class_type": "group",
+    "charging_model": "term_or_monthly",
+    "vat_profile_default": "PL_EDU_0",
+    "enable_public_booking": false,
+    "enable_parent_portal": true
+  },
+  "default_policies": "policies/school_default.json",
+  "default_products": [
+    "products/term-fee.json",
+    "products/subscription-monthly.json"
+  ],
+  "workflows_enabled": [
+    "edu.enrollment.group",
+    "edu.placement.assign",
+    "edu.attendance.settle",
+    "edu.digest.weekly",
+    "edu.contracts.school_parent"
+  ]
+}

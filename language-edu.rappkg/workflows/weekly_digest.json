@@ -1,0 +1,79 @@
+{
+  "code": "edu.digest.weekly",
+  "title": "Weekly Digest",
+  "context_scope": [
+    "organisation",
+    "class_group"
+  ],
+  "triggers": [
+    "cron.weekly"
+  ],
+  "steps": [
+    {
+      "id": "collect_lessons",
+      "title": "Collect week's lessons & topics",
+      "group": "Data",
+      "actor_role": "system",
+      "optional": false,
+      "execution": "auto",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "topics",
+          "type": "array:string"
+        }
+      ],
+      "actions": [
+        {
+          "type": "data.aggregate",
+          "args": {
+            "range": "last_week",
+            "fields": [
+              "topics",
+              "attendance"
+            ]
+          }
+        }
+      ],
+      "decorators": []
+    },
+    {
+      "id": "compose",
+      "title": "Compose digest",
+      "group": "Comms",
+      "actor_role": "system",
+      "optional": false,
+      "execution": "ai",
+      "inputs": [],
+      "outputs": [],
+      "actions": [
+        {
+          "type": "ai.compose",
+          "args": {
+            "template": "doc.weekly_digest"
+          }
+        }
+      ],
+      "decorators": []
+    },
+    {
+      "id": "send",
+      "title": "Send to parents",
+      "group": "Comms",
+      "actor_role": "system",
+      "optional": false,
+      "execution": "auto",
+      "inputs": [],
+      "outputs": [],
+      "actions": [
+        {
+          "type": "comms.send",
+          "args": {
+            "template": "doc.weekly_digest"
+          }
+        }
+      ],
+      "decorators": []
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "code": "edu.placement.assign",
+  "title": "Placement & Class Recommendation",
+  "context_scope": [
+    "organisation",
+    "student"
+  ],
+  "triggers": [
+    "placement_test_completed"
+  ],
+  "steps": [
+    {
+      "id": "score",
+      "title": "Score test",
+      "group": "Assessment",
+      "actor_role": "system",
+      "optional": false,
+      "execution": "auto",
+      "inputs": [
+        {
+          "name": "responses",
+          "type": "json",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "cefr_level",
+          "type": "enum",
+          "options": [
+            "A1",
+            "A2",
+            "B1",
+            "B2",
+            "C1",
+            "C2"
+          ]
+        }
+      ],
+      "actions": [
+        {
+          "type": "assessment.score",
+          "args": {
+            "rubric": "CEFR"
+          }
+        }
+      ],
+      "decorators": []
+    },
+    {
+      "id": "recommend",
+      "title": "Recommend class",
+      "group": "Placement",
+      "actor_role": "system",
+      "optional": false,
+      "execution": "ai",
+      "inputs": [],
+      "outputs": [],
+      "actions": [
+        {
+          "type": "ai.match_class",
+          "args": {
+            "consider": [
+              "schedule",
+              "capacity",
+              "level"
+            ]
+          }
+        }
+      ],
+      "decorators": []
+    },
+    {
+      "id": "offer",
+      "title": "Send offer to parent",
+      "group": "Comms",
+      "actor_role": "system",
+      "optional": false,
+      "execution": "auto",
+      "inputs": [],
+      "outputs": [],
+      "actions": [
+        {
+          "type": "comms.send",
+          "args": {
+            "template": "doc.weekly_digest",
+            "mode": "placement_offer"
+          }
+        }
+      ],
+      "decorators": []
+    }
+  ]
+}

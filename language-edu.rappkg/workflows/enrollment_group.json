@@ -1,0 +1,117 @@
+{
+  "code": "edu.enrollment.group",
+  "title": "Group Enrollment",
+  "context_scope": [
+    "organisation",
+    "student",
+    "class_group"
+  ],
+  "triggers": [
+    "staff_enroll_submit",
+    "placement_recommendation_accept"
+  ],
+  "steps": [
+    {
+      "id": "collect",
+      "title": "Collect enrollment details",
+      "group": "Enrollment",
+      "actor_role": "reception",
+      "optional": false,
+      "execution": "manual",
+      "inputs": [
+        {
+          "name": "student_id",
+          "type": "relation:Student",
+          "required": true
+        },
+        {
+          "name": "class_group_id",
+          "type": "relation:ClassGroup",
+          "required": true
+        },
+        {
+          "name": "start_date",
+          "type": "date",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "enrollment_id",
+          "type": "relation:Enrollment"
+        }
+      ],
+      "actions": [
+        {
+          "type": "class.enroll_student",
+          "args": {}
+        }
+      ],
+      "decorators": []
+    },
+    {
+      "id": "contract",
+      "title": "Generate & send contract",
+      "group": "Documents",
+      "actor_role": "system",
+      "optional": false,
+      "execution": "auto",
+      "inputs": [],
+      "outputs": [],
+      "actions": [
+        {
+          "type": "documents.generate",
+          "args": {
+            "template": "doc.contract.school_parent"
+          }
+        },
+        {
+          "type": "signature.request",
+          "args": {
+            "profile": "XAdES_BASIC"
+          }
+        }
+      ],
+      "decorators": []
+    },
+    {
+      "id": "bill",
+      "title": "Create invoice / schedule",
+      "group": "Billing",
+      "actor_role": "system",
+      "optional": false,
+      "execution": "auto",
+      "inputs": [],
+      "outputs": [],
+      "actions": [
+        {
+          "type": "billing.create_term_schedule",
+          "args": {
+            "product": "prod.term.fee"
+          }
+        }
+      ],
+      "decorators": []
+    },
+    {
+      "id": "notify",
+      "title": "Notify parent & teacher",
+      "group": "Comms",
+      "actor_role": "system",
+      "optional": false,
+      "execution": "auto",
+      "inputs": [],
+      "outputs": [],
+      "actions": [
+        {
+          "type": "comms.send",
+          "args": {
+            "template": "doc.weekly_digest",
+            "mode": "enrollment_welcome"
+          }
+        }
+      ],
+      "decorators": []
+    }
+  ]
+}

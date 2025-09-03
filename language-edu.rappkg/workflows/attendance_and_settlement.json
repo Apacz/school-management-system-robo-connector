@@ -1,0 +1,128 @@
+{
+  "code": "edu.attendance.settle",
+  "title": "Attendance & Settlement",
+  "context_scope": [
+    "organisation",
+    "lesson",
+    "student"
+  ],
+  "triggers": [
+    "lesson_completed",
+    "attendance_marked"
+  ],
+  "steps": [
+    {
+      "id": "record_attendance",
+      "title": "Record attendance",
+      "group": "Attendance",
+      "actor_role": "teacher",
+      "optional": false,
+      "execution": "manual",
+      "inputs": [
+        {
+          "name": "status",
+          "type": "enum",
+          "options": [
+            "present",
+            "late",
+            "no_show",
+            "cancelled"
+          ],
+          "required": true
+        },
+        {
+          "name": "notes",
+          "type": "text",
+          "required": false
+        }
+      ],
+      "outputs": [
+        {
+          "name": "attendance_id",
+          "type": "relation:Attendance"
+        }
+      ],
+      "actions": [],
+      "decorators": []
+    },
+    {
+      "id": "apply_policy",
+      "title": "Apply policy (charge/credit)",
+      "group": "Billing",
+      "actor_role": "system",
+      "optional": false,
+      "execution": "auto",
+      "inputs": [],
+      "outputs": [],
+      "actions": [
+        {
+          "type": "billing.apply_attendance_policy",
+          "args": {
+            "policy_ref_dynamic": true
+          }
+        }
+      ],
+      "decorators": []
+    },
+    {
+      "id": "recognize_revenue",
+      "title": "Recognize revenue (if due)",
+      "group": "Finance",
+      "actor_role": "system",
+      "optional": false,
+      "execution": "auto",
+      "inputs": [],
+      "outputs": [],
+      "actions": [
+        {
+          "type": "finance.recognize",
+          "args": {
+            "when": "present"
+          }
+        }
+      ],
+      "decorators": []
+    },
+    {
+      "id": "send_recap",
+      "title": "Send lesson recap",
+      "group": "Comms",
+      "actor_role": "teacher",
+      "optional": false,
+      "execution": "ai",
+      "inputs": [
+        {
+          "name": "topic",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "summary",
+          "type": "text",
+          "required": false
+        },
+        {
+          "name": "homework",
+          "type": "text",
+          "required": false
+        }
+      ],
+      "outputs": [],
+      "actions": [
+        {
+          "type": "ai.suggest",
+          "args": {
+            "template": "doc.lesson_recap"
+          }
+        },
+        {
+          "type": "comms.send",
+          "args": {
+            "template": "doc.lesson_recap"
+          }
+        }
+      ],
+      "decorators": []
+    }
+  ]
+}

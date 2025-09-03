@@ -1,0 +1,125 @@
+{
+  "app": {
+    "title": "Language Teaching",
+    "icon": "🎓",
+    "primary_color": "#2F6FED",
+    "routes": [
+      {
+        "code": "edu.dashboard.tutor",
+        "title": "Tutor Dashboard",
+        "path": "/edu/dashboard/tutor",
+        "required_scopes": [
+          "edu:view",
+          "edu:teacher"
+        ]
+      },
+      {
+        "code": "edu.dashboard.reception",
+        "title": "School Reception",
+        "path": "/edu/dashboard/reception",
+        "required_scopes": [
+          "edu:view",
+          "edu:reception"
+        ]
+      },
+      {
+        "code": "edu.parent.portal",
+        "title": "Parent/Student Portal",
+        "path": "/edu/portal",
+        "public": false,
+        "required_scopes": [
+          "edu:view"
+        ]
+      },
+      {
+        "code": "edu.booking.public",
+        "title": "Book a Trial",
+        "path": "/edu/booking/public",
+        "public": true
+      }
+    ],
+    "menu": [
+      {
+        "section": "Operate",
+        "items": [
+          {
+            "title": "Today",
+            "route": "edu.dashboard.tutor",
+            "visible_if": "org.flags.scheduling_mode == 'rolling-booking'"
+          },
+          {
+            "title": "Timetable",
+            "route": "edu.dashboard.reception",
+            "visible_if": "org.flags.scheduling_mode == 'static-timetable'"
+          }
+        ]
+      },
+      {
+        "section": "People",
+        "items": [
+          {
+            "title": "Students",
+            "route": "rc.crm.students.index"
+          },
+          {
+            "title": "Teachers",
+            "route": "rc.hr.teachers.index"
+          },
+          {
+            "title": "Groups",
+            "route": "rc.crm.groups.index"
+          }
+        ]
+      },
+      {
+        "section": "Learning",
+        "items": [
+          {
+            "title": "Courses",
+            "route": "rc.docs.courses.index"
+          },
+          {
+            "title": "Materials",
+            "route": "rc.docs.library.index"
+          },
+          {
+            "title": "Placement Tests",
+            "route": "edu.placement.index"
+          }
+        ]
+      },
+      {
+        "section": "Money",
+        "items": [
+          {
+            "title": "Products & Bundles",
+            "route": "rc.store.products.index",
+            "required_scopes": [
+              "edu:billing"
+            ]
+          },
+          {
+            "title": "Invoices",
+            "route": "rc.finance.invoices.index",
+            "required_scopes": [
+              "edu:billing"
+            ]
+          }
+        ]
+      },
+      {
+        "section": "Settings",
+        "items": [
+          {
+            "title": "Organisation Preset",
+            "route": "edu.settings.preset"
+          },
+          {
+            "title": "Policies",
+            "route": "edu.settings.policies"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "code": "edu.booking.1to1",
+  "title": "1:1 Booking Flow",
+  "context_scope": [
+    "organisation",
+    "student",
+    "teacher"
+  ],
+  "triggers": [
+    "public_booking_submit",
+    "staff_booking_create"
+  ],
+  "steps": [
+    {
+      "id": "collect_details",
+      "title": "Collect booking details",
+      "group": "Booking",
+      "actor_role": "reception_or_teacher",
+      "optional": false,
+      "execution": "manual",
+      "inputs": [
+        {
+          "name": "student_id",
+          "type": "relation:Student",
+          "required": true
+        },
+        {
+          "name": "teacher_id",
+          "type": "relation:Teacher",
+          "required": true
+        },
+        {
+          "name": "slot_start",
+          "type": "datetime",
+          "required": true
+        },
+        {
+          "name": "duration_min",
+          "type": "integer",
+          "default": 60
+        },
+        {
+          "name": "delivery_mode",
+          "type": "enum",
+          "options": [
+            "online",
+            "onsite"
+          ],
+          "required": true
+        },
+        {
+          "name": "room_or_link",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "outputs": [
+        {
+          "name": "lesson_id",
+          "type": "relation:Lesson"
+        }
+      ],
+      "actions": [
+        {
+          "type": "calendar.create_lesson",
+          "args": {
+            "create_link_if_online": true
+          }
+        }
+      ],
+      "decorators": []
+    },
+    {
+      "id": "payment_gate",
+      "title": "Payment requirement check",
+      "group": "Billing",
+      "actor_role": "system",
+      "optional": false,
+      "execution": "auto",
+      "inputs": [],
+      "outputs": [],
+      "actions": [
+        {
+          "type": "billing.evaluate_paywall",
+          "args": {
+            "policy_ref": "policy.tutor.default"
+          }
+        }
+      ],
+      "decorators": []
+    },
+    {
+      "id": "charge_or_authorize",
+      "title": "Charge or authorize payment",
+      "group": "Billing",
+      "actor_role": "system",
+      "optional": false,
+      "execution": "auto",
+      "inputs": [],
+      "outputs": [],
+      "actions": [
+        {
+          "type": "billing.charge_or_hold",
+          "args": {
+            "source": "bundle_or_card"
+          }
+        }
+      ],
+      "decorators": []
+    },
+    {
+      "id": "notify",
+      "title": "Send confirmations",
+      "group": "Comms",
+      "actor_role": "system",
+      "optional": false,
+      "execution": "auto",
+      "inputs": [],
+      "outputs": [],
+      "actions": [
+        {
+          "type": "comms.send",
+          "args": {
+            "template": "doc.lesson_recap",
+            "mode": "confirmation_brief",
+            "when": "immediate"
+          }
+        }
+      ],
+      "decorators": []
+    }
+  ]
+}

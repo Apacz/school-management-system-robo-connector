@@ -1,0 +1,11 @@
+{
+  "code": "policy.school.default",
+  "cancel_window_hours": 8,
+  "late_cancel_charge": "partial",
+  "no_show_charge": "partial",
+  "make_up_enabled": true,
+  "make_up_limit_per_month": 1,
+  "bundle_expiry_days": 365,
+  "attendance_required_for_revenue": true,
+  "digest_day_of_week": "Fri"
+}

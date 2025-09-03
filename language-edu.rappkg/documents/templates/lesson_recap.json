@@ -1,0 +1,16 @@
+{
+  "code": "doc.lesson_recap",
+  "title": "Lesson Recap",
+  "type": "message",
+  "audience": "parent_or_student",
+  "placeholders": [
+    "student.full_name",
+    "lesson.date",
+    "lesson.topic",
+    "lesson.summary",
+    "homework.text",
+    "next_lesson.date",
+    "teacher.full_name"
+  ],
+  "body_markdown": "**Student:** {{ student.full_name }}\n**Date:** {{ lesson.date | date('Y-m-d') }}\n**Topic:** {{ lesson.topic }}\n\n**What we covered**\n{{ lesson.summary }}\n\n**Homework**\n{{ homework.text }}\n\n**Next lesson:** {{ next_lesson.date | date('Y-m-d H:i') }}\n\n— {{ teacher.full_name }}\n"
+}

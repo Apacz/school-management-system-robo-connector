@@ -1,0 +1,60 @@
+{
+  "code": "edu.language",
+  "name": "Language Teaching Suite",
+  "version": "0.1.0",
+  "publisher": "Robo Meister",
+  "description": "Sector app for private language tutors and language schools. Adds presets, policies, workflows, and UI tiles on top of Robo Connector core.",
+  "tags": [
+    "education",
+    "language",
+    "school",
+    "tutor",
+    "booking",
+    "invoicing",
+    "attendance"
+  ],
+  "min_rc_version": "2025.1",
+  "modules_required": [
+    "CRM",
+    "Calendar",
+    "Documents",
+    "Finance",
+    "Store",
+    "BPM",
+    "AI",
+    "Communication",
+    "HR"
+  ],
+  "on_install": {
+    "run_workflows": [
+      "edu.onboarding.seed_defaults"
+    ],
+    "create_policies": [
+      "policies/tutor_default.json",
+      "policies/school_default.json"
+    ],
+    "create_products": [
+      "products/bundle-10x60.json",
+      "products/subscription-monthly.json",
+      "products/term-fee.json"
+    ],
+    "register_documents": [
+      "documents/templates/lesson_recap.json",
+      "documents/templates/weekly_digest.json",
+      "documents/templates/contract_tutor_parent.json",
+      "documents/templates/contract_school_parent.json"
+    ]
+  },
+  "on_uninstall": {
+    "cleanup": true
+  },
+  "permissions": {
+    "scopes": [
+      "edu:view",
+      "edu:manage",
+      "edu:billing",
+      "edu:teacher",
+      "edu:reception"
+    ]
+  }
+}

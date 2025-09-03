@@ -1,0 +1,83 @@
+{
+  "code": "edu.makeup.request",
+  "title": "Make-up Lesson Request",
+  "context_scope": [
+    "organisation",
+    "student",
+    "lesson"
+  ],
+  "triggers": [
+    "portal_makeup_request"
+  ],
+  "steps": [
+    {
+      "id": "check_policy",
+      "title": "Check make-up eligibility",
+      "group": "Policy",
+      "actor_role": "system",
+      "optional": false,
+      "execution": "auto",
+      "inputs": [],
+      "outputs": [],
+      "actions": [
+        {
+          "type": "policy.check",
+          "args": {
+            "policy_ref_dynamic": true,
+            "cap": "make_up_limit_per_month"
+          }
+        }
+      ],
+      "decorators": []
+    },
+    {
+      "id": "offer_slots",
+      "title": "Offer available slots",
+      "group": "Scheduling",
+      "actor_role": "system",
+      "optional": false,
+      "execution": "auto",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "slot_options",
+          "type": "array:datetime"
+        }
+      ],
+      "actions": [
+        {
+          "type": "calendar.find_slots",
+          "args": {
+            "teacher_preference": "same"
+          }
+        }
+      ],
+      "decorators": []
+    },
+    {
+      "id": "confirm",
+      "title": "Confirm & schedule make-up",
+      "group": "Scheduling",
+      "actor_role": "parent_or_student",
+      "optional": false,
+      "execution": "manual",
+      "inputs": [
+        {
+          "name": "selected_slot",
+          "type": "datetime",
+          "required": true
+        }
+      ],
+      "outputs": [],
+      "actions": [
+        {
+          "type": "calendar.create_lesson",
+          "args": {
+            "mark_as_makeup": true
+          }
+        }
+      ],
+      "decorators": []
+    }
+  ]
+}

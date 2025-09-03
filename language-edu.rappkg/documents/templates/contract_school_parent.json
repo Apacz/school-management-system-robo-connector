@@ -1,0 +1,17 @@
+{
+  "code": "doc.contract.school_parent",
+  "title": "Enrollment Agreement (School–Parent)",
+  "type": "contract",
+  "signature_profile": "XAdES_BASIC",
+  "parties": [
+    "organisation",
+    "parent"
+  ],
+  "placeholders": [
+    "class_group.name",
+    "term.dates",
+    "tuition.amount",
+    "policies.summary"
+  ],
+  "body_markdown": "Enrollment agreement for {{ class_group.name }} ({{ term.dates }}) with tuition {{ tuition.amount }}. Policies: {{ policies.summary }}."
+}

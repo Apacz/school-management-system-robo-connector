@@ -1,0 +1,11 @@
+{
+  "code": "policy.tutor.default",
+  "cancel_window_hours": 24,
+  "late_cancel_charge": "full",
+  "no_show_charge": "full",
+  "make_up_enabled": true,
+  "make_up_limit_per_month": 2,
+  "bundle_expiry_days": 180,
+  "attendance_required_for_revenue": true,
+  "digest_day_of_week": "Sun"
+}

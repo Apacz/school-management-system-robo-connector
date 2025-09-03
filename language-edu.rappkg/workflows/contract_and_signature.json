@@ -1,0 +1,53 @@
+{
+  "code": "edu.contracts.tutor_parent",
+  "title": "Tutor–Parent Contract",
+  "context_scope": [
+    "organisation",
+    "student",
+    "parent"
+  ],
+  "triggers": [
+    "enrollment_created",
+    "first_booking"
+  ],
+  "steps": [
+    {
+      "id": "generate",
+      "title": "Generate contract",
+      "group": "Documents",
+      "actor_role": "system",
+      "optional": false,
+      "execution": "auto",
+      "inputs": [],
+      "outputs": [],
+      "actions": [
+        {
+          "type": "documents.generate",
+          "args": {
+            "template": "doc.contract.tutor_parent"
+          }
+        }
+      ],
+      "decorators": []
+    },
+    {
+      "id": "sign",
+      "title": "Collect signatures",
+      "group": "Documents",
+      "actor_role": "system",
+      "optional": false,
+      "execution": "auto",
+      "inputs": [],
+      "outputs": [],
+      "actions": [
+        {
+          "type": "signature.request",
+          "args": {
+            "profile": "XAdES_BASIC"
+          }
+        }
+      ],
+      "decorators": []
+    }
+  ]
+}

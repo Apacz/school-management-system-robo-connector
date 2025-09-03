@@ -1,0 +1,17 @@
+{
+  "code": "doc.contract.tutor_parent",
+  "title": "Tutoring Agreement (Tutor–Parent)",
+  "type": "contract",
+  "signature_profile": "XAdES_BASIC",
+  "parties": [
+    "organisation",
+    "parent"
+  ],
+  "placeholders": [
+    "student.full_name",
+    "pricing.model",
+    "cancellation.window",
+    "payment.terms"
+  ],
+  "body_markdown": "Agreement between {{ organisation.name }} and {{ parent.full_name }} for tutoring services of {{ student.full_name }}..."
+}

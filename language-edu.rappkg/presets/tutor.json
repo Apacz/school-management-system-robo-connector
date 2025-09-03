@@ -1,0 +1,27 @@
+{
+  "code": "preset.tutor",
+  "title": "Solo Tutor",
+  "flags": {
+    "scheduling_mode": "rolling-booking",
+    "delivery_modes": [
+      "online",
+      "onsite"
+    ],
+    "class_type": "1to1",
+    "charging_model": "bundle_or_payg",
+    "vat_profile_default": "PL_EDU_0",
+    "enable_public_booking": true,
+    "enable_parent_portal": true
+  },
+  "default_policies": "policies/tutor_default.json",
+  "default_products": [
+    "products/bundle-10x60.json",
+    "products/subscription-monthly.json"
+  ],
+  "workflows_enabled": [
+    "edu.booking.1to1",
+    "edu.attendance.settle",
+    "edu.documents.lesson_recap",
+    "edu.contracts.tutor_parent"
+  ]
+}
