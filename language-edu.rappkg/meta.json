@@ -34,7 +34,9 @@
       "policies/school_default.json"
     ],
     "create_products": [
+      "products/bundle-10x45.json",
       "products/bundle-10x60.json",
+      "products/dropin-90.json",
       "products/subscription-monthly.json",
       "products/term-fee.json"
     ],

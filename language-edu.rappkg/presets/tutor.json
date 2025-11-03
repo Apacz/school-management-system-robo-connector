@@ -11,11 +11,19 @@
     "charging_model": "bundle_or_payg",
     "vat_profile_default": "PL_EDU_0",
     "enable_public_booking": true,
-    "enable_parent_portal": true
+    "enable_parent_portal": true,
+    "lesson_duration_tiers": [
+      45,
+      60,
+      90
+    ],
+    "lesson_duration_default": 60
   },
   "default_policies": "policies/tutor_default.json",
   "default_products": [
+    "products/bundle-10x45.json",
     "products/bundle-10x60.json",
+    "products/dropin-90.json",
     "products/subscription-monthly.json"
   ],
   "workflows_enabled": [

@@ -1,0 +1,16 @@
+{
+  "code": "prod.dropin.90",
+  "title": "Drop-in 90min",
+  "type": "bundle",
+  "lesson_minutes": 90,
+  "quantity": 1,
+  "price": {
+    "currency": "PLN",
+    "amount": 180
+  },
+  "vat_profile": "PL_EDU_0",
+  "redeem_policy": {
+    "expiry_days": 60,
+    "transferable": false
+  }
+}

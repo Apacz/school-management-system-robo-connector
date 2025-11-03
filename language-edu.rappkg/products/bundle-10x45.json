@@ -1,0 +1,16 @@
+{
+  "code": "prod.bundle.10x45",
+  "title": "Bundle 10×45min",
+  "type": "bundle",
+  "lesson_minutes": 45,
+  "quantity": 10,
+  "price": {
+    "currency": "PLN",
+    "amount": 900
+  },
+  "vat_profile": "PL_EDU_0",
+  "redeem_policy": {
+    "expiry_days": 180,
+    "transferable": false
+  }
+}

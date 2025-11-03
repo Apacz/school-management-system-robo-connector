@@ -24,6 +24,44 @@
             "preset.school"
           ],
           "required": true
+        },
+        {
+          "name": "lesson_duration_tiers",
+          "type": "enum",
+          "options": [
+            [
+              45,
+              60
+            ],
+            [
+              45,
+              60,
+              90
+            ],
+            [
+              60
+            ],
+            [
+              60,
+              90
+            ]
+          ],
+          "default": [
+            45,
+            60
+          ],
+          "required": true
+        },
+        {
+          "name": "default_lesson_duration",
+          "type": "enum",
+          "options": [
+            45,
+            60,
+            90
+          ],
+          "default": 60,
+          "required": true
         }
       ],
       "outputs": [
@@ -36,7 +74,13 @@
         {
           "type": "apply_preset",
           "args": {
-            "preset_var": "preset"
+            "preset_var": "preset",
+            "overrides": {
+              "flags": {
+                "lesson_duration_tiers": "${lesson_duration_tiers}",
+                "lesson_duration_default": "${default_lesson_duration}"
+              }
+            }
           }
         }
       ],

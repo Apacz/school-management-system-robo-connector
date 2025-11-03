@@ -105,6 +105,19 @@
           "name": "homework",
           "type": "text",
           "required": false
+        },
+        {
+          "name": "attachments",
+          "type": "array:attachment",
+          "label": "Attachments",
+          "required": false,
+          "ui": {
+            "picker": {
+              "route": "rc.docs.library.index",
+              "mode": "multiple"
+            },
+            "help": "Attach lesson materials or homework files from the library."
+          }
         }
       ],
       "outputs": [],
