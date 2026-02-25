@@ -1,9 +1,11 @@
 {
   "code": "edu.language",
   "name": "Language Teaching Suite",
+  "type": "app",
   "version": "0.1.0",
   "publisher": "Robo Meister",
   "description": "Sector app for private language tutors and language schools. Adds presets, policies, workflows, and UI tiles on top of Robo Connector core.",
+  "mainImage": "/screenshots/Call_And_Meet.png",
   "tags": [
     "education",
     "language",
@@ -13,6 +15,51 @@
     "invoicing",
     "attendance"
   ],
+  "title": "Language Teaching Suite",
+  "outcome": "Lesson prep time ↓ 30% • Billing accuracy ↑ 20% • Parent updates sent same day.",
+  "kpis": [
+    {
+      "name": "Prep time",
+      "delta": "-30%"
+    },
+    {
+      "name": "Billing accuracy",
+      "delta": "+20%"
+    },
+    {
+      "name": "On-time updates",
+      "delta": "+40%"
+    }
+  ],
+  "prereqs": {
+    "apis": [
+      "Calendar API (Google/Microsoft)",
+      "Payment gateway API (Stripe/PayU)"
+    ],
+    "devices": [
+      "Teacher laptop or tablet",
+      "Parent mobile access (optional)"
+    ],
+    "roles": [
+      "School admin",
+      "Tutor/teacher",
+      "Reception"
+    ]
+  },
+  "badges": [
+    "verified_integration",
+    "education_ready"
+  ],
+  "install_steps": [
+    "Install the suite",
+    "Connect calendar and payments",
+    "Import students and launch lessons"
+  ],
+  "demo": {
+    "video": "/static/demos/language-teaching-suite.mp4",
+    "length_sec": 90
+  },
+  "arch_diagram": "/static/diagrams/language-teaching-suite-architecture.png",
   "min_rc_version": "2025.1",
   "modules_required": [
     "CRM",
