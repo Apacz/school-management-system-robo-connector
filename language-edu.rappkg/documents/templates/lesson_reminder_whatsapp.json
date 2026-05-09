@@ -1,0 +1,16 @@
+{
+  "code": "doc.lesson_reminder_whatsapp",
+  "title": "Lesson Reminder (WhatsApp)",
+  "type": "message",
+  "channel": "whatsapp",
+  "audience": "parent_or_student",
+  "placeholders": [
+    "student.first_name",
+    "lesson.date",
+    "lesson.time",
+    "lesson.location_or_link",
+    "teacher.first_name",
+    "invoice.balance_due"
+  ],
+  "body_markdown": "*Reminder:* {{ student.first_name }} has a lesson on *{{ lesson.date }}* at *{{ lesson.time }}* with {{ teacher.first_name }}.\nLocation/Join link: {{ lesson.location_or_link }}\nOutstanding balance: {{ invoice.balance_due }}"
+}

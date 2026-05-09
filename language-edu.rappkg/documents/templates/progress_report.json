@@ -1,0 +1,21 @@
+{
+  "code": "doc.progress_report",
+  "title": "Student Progress Report",
+  "type": "report",
+  "audience": "guardian_or_student",
+  "formats": [
+    "pdf",
+    "docx"
+  ],
+  "placeholders": [
+    "report.student.name",
+    "report.time_range.from",
+    "report.time_range.to",
+    "report.attendance.rate",
+    "report.enrollments[]",
+    "report.assessments[]",
+    "report.homework[]",
+    "generated_at"
+  ],
+  "body_markdown": "Progress report for {{ report.student.name }} covering {{ report.time_range.from ?? 'all time' }} to {{ report.time_range.to ?? 'present' }}."
+}

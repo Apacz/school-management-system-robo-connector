@@ -1,0 +1,16 @@
+{
+  "code": "doc.lesson_reminder_sms",
+  "title": "Lesson Reminder (SMS)",
+  "type": "message",
+  "channel": "sms",
+  "audience": "parent_or_student",
+  "placeholders": [
+    "student.first_name",
+    "lesson.date",
+    "lesson.time",
+    "lesson.link",
+    "teacher.first_name",
+    "credits.remaining"
+  ],
+  "body_text": "Hi {{ student.first_name }}, reminder: lesson on {{ lesson.date }} at {{ lesson.time }} with {{ teacher.first_name }}. Join: {{ lesson.link }}. Credits left: {{ credits.remaining }}."
+}

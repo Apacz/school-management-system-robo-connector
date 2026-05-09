@@ -1,16 +1,67 @@
 {
   "code": "edu.enrollment.group",
-  "title": "Group Enrollment",
+  "title": "School Application & Group Enrollment",
   "context_scope": [
     "organisation",
     "student",
     "class_group"
   ],
   "triggers": [
+    "school_application_submit",
     "staff_enroll_submit",
     "placement_recommendation_accept"
   ],
   "steps": [
+    {
+      "id": "application_review",
+      "title": "Review school application",
+      "group": "Admissions",
+      "actor_role": "reception",
+      "optional": false,
+      "execution": "manual",
+      "inputs": [
+        {
+          "name": "application_id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "decision",
+          "type": "enum",
+          "options": [
+            "approved",
+            "waitlist",
+            "rejected"
+          ],
+          "required": true
+        },
+        {
+          "name": "decision_note",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "outputs": [
+        {
+          "name": "application_status",
+          "type": "enum",
+          "options": [
+            "approved",
+            "waitlist",
+            "rejected"
+          ]
+        }
+      ],
+      "actions": [
+        {
+          "type": "admissions.set_status",
+          "args": {
+            "status_var": "decision"
+          }
+        }
+      ],
+      "decorators": []
+    },
     {
       "id": "collect",
       "title": "Collect enrollment details",
@@ -42,6 +93,12 @@
         }
       ],
       "actions": [
+        {
+          "type": "workflow.guard",
+          "args": {
+            "when": "application_status == 'approved'"
+          }
+        },
         {
           "type": "class.enroll_student",
           "args": {}

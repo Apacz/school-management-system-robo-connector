@@ -1,8 +1,10 @@
 {
   "code": "edu.language",
   "name": "Language Teaching Suite",
+  "channel": "stable",
   "type": "app",
-  "version": "0.1.0",
+  "entry": "app.json",
+  "version": "0.4.0",
   "publisher": "Robo Meister",
   "description": "Sector app for private language tutors and language schools. Adds presets, policies, workflows, and UI tiles on top of Robo Connector core.",
   "mainImage": "/screenshots/Call_And_Meet.png",
@@ -91,7 +93,14 @@
       "documents/templates/lesson_recap.json",
       "documents/templates/weekly_digest.json",
       "documents/templates/contract_tutor_parent.json",
-      "documents/templates/contract_school_parent.json"
+      "documents/templates/contract_school_parent.json",
+      "documents/templates/lesson_reminder_sms.json",
+      "documents/templates/lesson_reminder_whatsapp.json",
+      "documents/templates/progress_report.json",
+      "documents/templates/enrollment_certificate.json"
+    ],
+    "register_dashboards": [
+      "dashboards/default.json"
     ]
   },
   "on_uninstall": {
@@ -105,5 +114,8 @@
       "edu:teacher",
       "edu:reception"
     ]
-  }
+  },
+  "applications": [
+    "Language Teaching"
+  ]
 }

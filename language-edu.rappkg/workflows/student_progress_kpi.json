@@ -1,0 +1,66 @@
+{
+  "code": "edu.progress.kpi",
+  "title": "Per-student Progress KPI Snapshot",
+  "context_scope": [
+    "organisation",
+    "student",
+    "lesson",
+    "assessment"
+  ],
+  "triggers": [
+    "lesson_completed",
+    "assessment_submitted",
+    "cron.weekly"
+  ],
+  "steps": [
+    {
+      "id": "aggregate_learning_signals",
+      "title": "Aggregate attendance, homework, and assessment signals",
+      "group": "Data",
+      "actor_role": "system",
+      "optional": false,
+      "execution": "auto",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "progress_kpis",
+          "type": "json"
+        }
+      ],
+      "actions": [
+        {
+          "type": "analytics.compute_student_progress",
+          "args": {
+            "dimensions": [
+              "attendance_rate",
+              "homework_completion",
+              "skill_mastery",
+              "pace_vs_target"
+            ]
+          }
+        }
+      ],
+      "decorators": []
+    },
+    {
+      "id": "publish_dashboard_metrics",
+      "title": "Publish KPI metrics for dashboard widgets",
+      "group": "Analytics",
+      "actor_role": "system",
+      "optional": false,
+      "execution": "auto",
+      "inputs": [],
+      "outputs": [],
+      "actions": [
+        {
+          "type": "dashboards.publish",
+          "args": {
+            "target": "edu_default_operations",
+            "dataset": "progress_kpis"
+          }
+        }
+      ],
+      "decorators": []
+    }
+  ]
+}

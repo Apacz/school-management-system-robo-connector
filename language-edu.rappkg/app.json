@@ -7,7 +7,7 @@
       {
         "code": "edu.dashboard.tutor",
         "title": "Tutor Dashboard",
-        "path": "/edu/dashboard/tutor",
+        "path": "/app/edu/dashboard.tutor",
         "required_scopes": [
           "edu:view",
           "edu:teacher"
@@ -16,7 +16,7 @@
       {
         "code": "edu.dashboard.reception",
         "title": "School Reception",
-        "path": "/edu/dashboard/reception",
+        "path": "/app/edu/dashboard.reception",
         "required_scopes": [
           "edu:view",
           "edu:reception"
@@ -25,17 +25,61 @@
       {
         "code": "edu.parent.portal",
         "title": "Parent/Student Portal",
-        "path": "/edu/portal",
+        "path": "/app/edu/parent.portal",
         "public": false,
         "required_scopes": [
           "edu:view"
         ]
       },
       {
+        "code": "edu.admissions.index",
+        "title": "Admissions",
+        "path": "/app/edu/admissions.index",
+        "required_scopes": [
+          "edu:view",
+          "edu:reception"
+        ]
+      },
+      {
         "code": "edu.booking.public",
         "title": "Book a Trial",
-        "path": "/edu/booking/public",
+        "path": "/app/edu/booking.public",
         "public": true
+      },
+      {
+        "code": "edu.finance.reconciliation",
+        "title": "Lesson vs Payment Reconciliation",
+        "path": "/app/edu/finance.reconciliation",
+        "required_scopes": [
+          "edu:view",
+          "edu:billing"
+        ]
+      },
+      {
+        "code": "edu.credits.ledger",
+        "title": "Session Credit Ledger",
+        "path": "/app/edu/credits.ledger",
+        "required_scopes": [
+          "edu:view",
+          "edu:billing"
+        ]
+      },
+      {
+        "code": "edu.progress.students",
+        "title": "Student Progress KPIs",
+        "path": "/app/edu/progress.students",
+        "required_scopes": [
+          "edu:view",
+          "edu:teacher"
+        ]
+      },
+      {
+        "code": "edu.comms.channels",
+        "title": "Channel Templates",
+        "path": "/app/edu/comms.channels",
+        "required_scopes": [
+          "edu:view"
+        ]
       }
     ],
     "menu": [
@@ -68,6 +112,10 @@
           {
             "title": "Groups",
             "route": "rc.crm.groups.index"
+          },
+          {
+            "title": "Applications",
+            "route": "edu.admissions.index"
           }
         ]
       },
@@ -85,6 +133,10 @@
           {
             "title": "Placement Tests",
             "route": "edu.placement.index"
+          },
+          {
+            "title": "Student Progress KPIs",
+            "route": "edu.progress.students"
           }
         ]
       },
@@ -104,6 +156,20 @@
             "required_scopes": [
               "edu:billing"
             ]
+          },
+          {
+            "title": "Session Credit Ledger",
+            "route": "edu.credits.ledger",
+            "required_scopes": [
+              "edu:billing"
+            ]
+          },
+          {
+            "title": "Lesson vs Payment Reconciliation",
+            "route": "edu.finance.reconciliation",
+            "required_scopes": [
+              "edu:billing"
+            ]
           }
         ]
       },
@@ -117,6 +183,10 @@
           {
             "title": "Policies",
             "route": "edu.settings.policies"
+          },
+          {
+            "title": "Channel Templates",
+            "route": "edu.comms.channels"
           }
         ]
       }

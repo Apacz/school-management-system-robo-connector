@@ -1,0 +1,69 @@
+{
+  "code": "edu.comms.multichannel",
+  "title": "Tutor Communication Multi-channel Templates",
+  "context_scope": [
+    "organisation",
+    "student",
+    "parent",
+    "lesson"
+  ],
+  "triggers": [
+    "booking.created",
+    "lesson_reminder_due",
+    "payment_overdue"
+  ],
+  "steps": [
+    {
+      "id": "resolve_channel_preferences",
+      "title": "Resolve parent/student preferred channel",
+      "group": "Comms",
+      "actor_role": "system",
+      "optional": false,
+      "execution": "auto",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "preferred_channel",
+          "type": "enum",
+          "options": [
+            "email",
+            "sms",
+            "whatsapp"
+          ]
+        }
+      ],
+      "actions": [
+        {
+          "type": "comms.resolve_channel",
+          "args": {
+            "fallback": "email"
+          }
+        }
+      ],
+      "decorators": []
+    },
+    {
+      "id": "send_channel_specific_template",
+      "title": "Send channel-specific template",
+      "group": "Comms",
+      "actor_role": "system",
+      "optional": false,
+      "execution": "auto",
+      "inputs": [],
+      "outputs": [],
+      "actions": [
+        {
+          "type": "comms.send",
+          "args": {
+            "template_by_channel": {
+              "email": "doc.lesson_recap",
+              "sms": "doc.lesson_reminder_sms",
+              "whatsapp": "doc.lesson_reminder_whatsapp"
+            }
+          }
+        }
+      ],
+      "decorators": []
+    }
+  ]
+}

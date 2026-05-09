@@ -1,0 +1,23 @@
+{
+  "code": "doc.enrollment_certificate",
+  "title": "Enrollment Certificate",
+  "type": "certificate",
+  "audience": "guardian_or_student",
+  "formats": [
+    "pdf",
+    "docx"
+  ],
+  "placeholders": [
+    "certificate.student.name",
+    "certificate.course.name",
+    "certificate.cohort",
+    "certificate.criteria.meets_criteria",
+    "certificate.criteria.attendance_rate",
+    "certificate.criteria.assessment_percentage",
+    "certificate.minimums.attendance_rate",
+    "certificate.minimums.assessment_percentage",
+    "certificate.issued_at",
+    "certificate.organisation.name"
+  ],
+  "body_markdown": "Certificate confirming completion status for {{ certificate.student.name }} in {{ certificate.course.name }}."
+}

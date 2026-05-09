@@ -1,0 +1,102 @@
+{
+  "code": "edu.credits.ledger",
+  "title": "Prepaid Session Credit Ledger",
+  "context_scope": [
+    "organisation",
+    "student",
+    "invoice",
+    "lesson"
+  ],
+  "triggers": [
+    "invoice_paid",
+    "lesson_completed",
+    "lesson_cancelled",
+    "refund_processed"
+  ],
+  "steps": [
+    {
+      "id": "allocate_credits_from_bundle",
+      "title": "Allocate credits when bundle/term invoice is paid",
+      "group": "Billing",
+      "actor_role": "system",
+      "optional": false,
+      "execution": "auto",
+      "inputs": [],
+      "outputs": [],
+      "actions": [
+        {
+          "type": "ledger.credit",
+          "args": {
+            "when": "trigger == 'invoice_paid'",
+            "source": "invoice",
+            "unit": "session",
+            "entry_type": "bundle_purchase"
+          }
+        }
+      ],
+      "decorators": []
+    },
+    {
+      "id": "consume_credit_on_attendance",
+      "title": "Consume one session credit when lesson is attended",
+      "group": "Billing",
+      "actor_role": "system",
+      "optional": false,
+      "execution": "auto",
+      "inputs": [],
+      "outputs": [],
+      "actions": [
+        {
+          "type": "ledger.debit",
+          "args": {
+            "when": "lesson.status == 'completed'",
+            "unit": "session",
+            "entry_type": "lesson_attended"
+          }
+        }
+      ],
+      "decorators": []
+    },
+    {
+      "id": "credit_reversal_policy",
+      "title": "Reverse or restore credits from cancellation policy",
+      "group": "Billing",
+      "actor_role": "system",
+      "optional": false,
+      "execution": "auto",
+      "inputs": [],
+      "outputs": [],
+      "actions": [
+        {
+          "type": "ledger.adjust",
+          "args": {
+            "policy_ref_dynamic": true,
+            "entry_type": "policy_adjustment"
+          }
+        }
+      ],
+      "decorators": []
+    },
+    {
+      "id": "notify_low_balance",
+      "title": "Notify when credits are low",
+      "group": "Comms",
+      "actor_role": "system",
+      "optional": true,
+      "execution": "auto",
+      "inputs": [],
+      "outputs": [],
+      "actions": [
+        {
+          "type": "comms.send",
+          "args": {
+            "when": "student.credit_balance_sessions <= 2",
+            "template": "doc.lesson_reminder_sms",
+            "mode": "credit_low_balance"
+          }
+        }
+      ],
+      "decorators": []
+    }
+  ]
+}

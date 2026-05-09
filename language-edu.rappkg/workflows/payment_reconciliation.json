@@ -1,0 +1,87 @@
+{
+  "code": "edu.finance.reconciliation",
+  "title": "Lesson Delivery vs Payment Reconciliation",
+  "context_scope": [
+    "organisation",
+    "teacher",
+    "student",
+    "invoice",
+    "lesson"
+  ],
+  "triggers": [
+    "cron.daily",
+    "invoice_paid",
+    "lesson_completed"
+  ],
+  "steps": [
+    {
+      "id": "collect_lesson_finance_facts",
+      "title": "Collect delivered lessons and invoice status",
+      "group": "Finance",
+      "actor_role": "system",
+      "optional": false,
+      "execution": "auto",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "variance_report",
+          "type": "json"
+        }
+      ],
+      "actions": [
+        {
+          "type": "finance.reconcile_lessons_vs_invoices",
+          "args": {
+            "group_by": [
+              "student",
+              "teacher",
+              "product"
+            ],
+            "window": "current_month"
+          }
+        }
+      ],
+      "decorators": []
+    },
+    {
+      "id": "flag_mismatches",
+      "title": "Flag mismatches for follow-up",
+      "group": "Finance",
+      "actor_role": "system",
+      "optional": false,
+      "execution": "auto",
+      "inputs": [],
+      "outputs": [],
+      "actions": [
+        {
+          "type": "tasks.create",
+          "args": {
+            "from": "variance_report",
+            "only_when": "variance_report.amount_due > 0"
+          }
+        }
+      ],
+      "decorators": []
+    },
+    {
+      "id": "send_reconciliation_digest",
+      "title": "Send reconciliation digest",
+      "group": "Comms",
+      "actor_role": "system",
+      "optional": false,
+      "execution": "auto",
+      "inputs": [],
+      "outputs": [],
+      "actions": [
+        {
+          "type": "comms.send",
+          "args": {
+            "template": "doc.weekly_digest",
+            "mode": "finance_reconciliation"
+          }
+        }
+      ],
+      "decorators": []
+    }
+  ]
+}

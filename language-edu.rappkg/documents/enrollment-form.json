@@ -1,0 +1,8 @@
+{
+  "type": "document",
+  "code": "enrollment_form",
+  "name": "Student Enrollment Form",
+  "description": "Template for collecting school application and enrollment details.",
+  "template": true,
+  "content": "School Application Form\n\nApplication ID: {{application_id}}\nSubmission Date: {{submission_date}}\nStudent Name: {{student_name}}\nDate of Birth: {{student_dob}}\nProgram: {{program_name}}\nPreferred Start Date: {{start_date}}\nGuardian Contact: {{guardian_contact}}\nConsent for Communication: {{consent_communication}}\n\n%%content%%"
+}

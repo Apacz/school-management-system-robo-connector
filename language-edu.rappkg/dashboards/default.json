@@ -1,0 +1,18 @@
+{
+  "name": "edu_default_operations",
+  "widgets": [
+    "upcoming_lessons_7d",
+    "lesson_completion_rate",
+    "prepaid_credits_balance",
+    "lessons_delivered_vs_invoiced",
+    "collected_vs_outstanding_mtd",
+    "student_progress_trend",
+    "student_mastery_by_skill",
+    "at_risk_students"
+  ],
+  "segments": [
+    "teacher",
+    "student",
+    "group"
+  ]
+}
